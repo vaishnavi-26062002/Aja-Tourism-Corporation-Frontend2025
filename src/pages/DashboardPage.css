@@ -1,0 +1,19 @@
+.dashboard-page {
+  background: white;
+  border-radius: 8px;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-page h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-page p {
+  color: #666;
+  font-size: 1.2rem;
+}
+
