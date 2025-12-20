@@ -1,59 +1,109 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './LoginPage.css'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
-function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+const LoginPage = () => {
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Simple validation - in real app, this would call an API
-    if (email && password) {
-      navigate('/dashboard')
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      setMessage("Please fill all fields");
+      return;
     }
-  }
+
+    if (formData.password.length < 6) {
+      setMessage("Password must be at least 6 characters");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(u => u.email === formData.email);
+
+    if (user && user.password === formData.password) {
+      alert("Login Successful ✅");
+      setMessage("");
+      // navigate("/dashboard");
+    } else {
+      setMessage("Invalid credentials ❌");
+    }
+  };
+
+  const forgotPassword = () => {
+    if (!formData.email) {
+      alert("Enter email first");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(u => u.email === formData.email);
+
+    user
+      ? alert(`Your password is: ${user.password}`)
+      : alert("Email not registered");
+  };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="login-header">
-          <h1>Aja Tourism</h1>
-          <p>Welcome back! Please login to continue.</p>
-        </div>
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+    <section className="login-page">
+      <div className="login-box">
+        <h2>Aja Tourism</h2>
+
+        <form onSubmit={handleLogin}>
+          <div className="input-group">
+            <label>Email</label>
             <input
               type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
               placeholder="Enter your email"
-              required
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+
+          <div className="input-group">
+            <label>Password</label>
             <input
               type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
               placeholder="Enter your password"
-              required
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
-          <button type="submit" className="login-button">
-            Login
+
+          {message && <p className="error-text">{message}</p>}
+
+          <button type="submit" className="login-btn">
+            Sign In
           </button>
+
+          <span className="forgot" onClick={forgotPassword}>
+            Forgot password?
+          </span>
+
+          <p className="register-text">
+            New here?
+            <a href="/"> Create account</a>
+          </p>
         </form>
-        <a href="/" className="back-link">← Back to Home</a>
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default LoginPage
-
+export default LoginPage;
