@@ -1,30 +1,27 @@
-/* Register.css */
+
 
 .page {
     margin: 0;
     /* font-family: 'Poppins', sans-serif; */
-    background: url('../assets/ChatGPT\ Image\ Dec\ 16\,\ 2025\,\ 04_14_32\ PM.png');
+    background: url('../assets/bgimg.png');
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-position: 0px;
     background-size: cover;
-
-
 }
 
 .register-page {
     /* background: rgba(204, 188, 188, 0.65); */
-    padding: 25px 35px;
-    border-radius: 20px;
+    padding: 5px 20px;
+    border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    width: 250px;
-    margin-right: 500px;
-
+    width: 380px;
+    margin-right: 350px; 
+     
 
 }
-
 
 
 .register-page:hover {
@@ -35,21 +32,27 @@
 h2 {
     text-align: center;
     color: #1a1a1a;
-    margin-bottom: 5px;
-    margin-top: 1px;
+    margin-bottom: 8px;
+    margin-top: 0px;
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}   
 }
 
 .tagline {
     text-align: center;
     font-size: 14px;
     color: #948181;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 1px;
+
 
 }
 
@@ -60,16 +63,15 @@ input[type="confirm password"],
 input[type="tel"],
 input[type="date"],
 input[type="Aadhar Number"] {
-    padding: 6px;
-    border: groove;
+    padding: 2px;
+    border: 1px solid #bbb;
     border-radius: 6px;
     font-size: 14px;
-
 
 }
 
 label {
-    font-size: 15x;
+    font-size: 14x;
     color: #f6f0f0e9;
     font-weight: 700;
 }
