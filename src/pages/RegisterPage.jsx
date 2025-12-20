@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Register.css";
+import "./RegisterPage.css";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -74,14 +74,14 @@ const Register = () => {
           <label>confirmPassword:</label>
           <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} />
           <label>Date of Birth:</label>
-          <input type="text"  onChange={handleChange} />
+          <input type="date" name="dob" placeholder="Date of Birth"  onChange={handleChange} />
           <div className="radio-group">
             <label>
               <input type="radio" name="nationality" value="Indian" checked={form.nationality === "Indian"} onChange={handleChange}/>
               Indian
             </label>
             <label>
-              <input type="radio" name="nationality" value="Non Indian" checked={form.nationality === "Non indian"} onChange={handleChange}/>
+              <input type="radio" name="nationality" value="Non Indian" checked={form.nationality === "Non Indian"} onChange={handleChange}/>
               Non Indian
             </label>
           </div>

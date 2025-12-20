@@ -3,7 +3,7 @@
  .page{
   margin: 0;
   /* font-family: 'Poppins', sans-serif; */
-  background: url('../assets/ChatGPT\ Image\ Dec\ 16\,\ 2025\,\ 04_14_32\ PM.png') ;
+  background: url('../assets/hyd3.jpg.jpg') ;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
 
 }
 .register-page:hover{
-  background: rgba(167, 168, 168, 0.6);
+  background: rgba(251, 252, 209, 0.5);
 
 }
 
@@ -68,7 +68,7 @@ input[type="Passport Number"] {
 
 label {
   font-size: 15x;
-  color: #f6f0f0e9;
+  color: #1d1a1be9;
   font-weight: 700;
 }
 
@@ -76,7 +76,7 @@ label {
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
-  accent-color: #007bff
+  accent-color: #3b09ba
 
 }
 
