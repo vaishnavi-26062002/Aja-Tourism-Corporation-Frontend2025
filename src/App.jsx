@@ -8,7 +8,7 @@ import ToursPage from './pages/ToursPage'
 import BookingsPage from './pages/BookingsPage'
 import CustomersPage from './pages/CustomersPage'
 import DestinationsPage from './pages/DestinationsPage'
-import PackagesPage from './pages/PackagesPage'
+import PackagesPage from './pages/PackagesPage' 
 import ReportsPage from './pages/ReportsPage'
 import SettingsPage from './pages/SettingsPage'
 
