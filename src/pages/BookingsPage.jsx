@@ -182,7 +182,7 @@ export default function Bookings() {
 
                 <td>
                   <div className="actions">
-                    <select
+                    <select 
                       className="input"
                       value={b.status}
                       onChange={(e) => updateStatus(b.id, e.target.value)}
