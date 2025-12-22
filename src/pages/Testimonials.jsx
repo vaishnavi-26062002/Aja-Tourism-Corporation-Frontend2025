@@ -15,6 +15,30 @@ const testimonials = [
     img: "/mallesh.jpg",
   },
   {
+    name: "Chandra Sekhar Bijibilla",
+    location: "USA",
+    review:
+      "AJA Tourism Corporation exceeded our expectations! The guided tour of Golconda Fort and the vibrant Laad Bazaar were unforgettable experiences.",
+    rating: "★★★★★",
+    img: "/chandra.jpg",
+  },
+  {
+    name: "Siva Sankara Reddi Yannam",
+    location: "Canada",
+    review:
+      "From the majestic Chowmahalla Palace to the bustling streets of Hyderabad, AJA Tourism Corporation provided exceptional service throughout our journey.",
+    rating: "★★★★☆",
+    img: "/siva.jpg",
+  },
+  {
+    name: "Asma Khanam",
+    location: "Saudi Arabia",
+    review:
+      "AJA Tourism planned our trip perfectly. Transport, and sightseeing were excellent. From the aroma of biryani to the grandeur of Charminar, Hyderabad stole our hearts!",
+    rating: "★★★★★",
+    img:'/asma.jpg',
+  },
+  {
     name: "Vaishnavi Nampalli",
     location: "Delhi, India",
     review:
@@ -114,14 +138,6 @@ const testimonials = [
     review: "From Charminar to Golconda, every moment was magical thanks to AJA Tourism!",
        rating: "★★★★★", 
     img: "/imran.jpg",
-  },
-  {
-    name: "Asma Khanam",
-    location: "Saudi Arabia",
-    review:
-      "AJA Tourism planned our trip perfectly. Transport, and sightseeing were excellent. From the aroma of biryani to the grandeur of Charminar, Hyderabad stole our hearts!",
-    rating: "★★★★★",
-    img:'/asma.jpg',
   },
 ];
 
