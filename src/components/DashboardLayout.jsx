@@ -9,12 +9,13 @@ function DashboardLayout() {
   const navigate = useNavigate()
 
   const menuItems = [
-    {path: 'contact' , label: 'Contact' , icon:'✆'},
+  
     { path: '/dashboard', label: 'Dashboard', icon: '📊' },
     { path: '/dashboard/bookings', label: 'Bookings', icon: '📅' },
     { path: '/dashboard/customers', label: 'Customers', icon: '👥' },
     { path: '/dashboard/destinations', label: 'Destinations', icon: '🌍' },
     { path: '/dashboard/packages', label: 'Packages', icon: '🌍' },
+    
   ]
 
   const handleLogout = () => {
@@ -60,7 +61,7 @@ function DashboardLayout() {
             </button>
           </div>
         </header>
-
+ 
         <main className="dashboard-content">
           <Outlet />
         </main>

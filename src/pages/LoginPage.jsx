@@ -19,30 +19,51 @@ const LoginPage = () => {
     });
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+ const handleLogin = async (e) => {
+  e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      setMessage("Please fill all fields");
-      return;
+  if (!formData.email || !formData.password) {
+    setMessage("Please fill all fields");
+    return;
+  }
+
+  if (formData.password.length < 6) {
+    setMessage("Password must be at least 6 characters");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Invalid credentials");
     }
 
-    if (formData.password.length < 6) {
-      setMessage("Password must be at least 6 characters");
-      return;
-    }
+    const user = await response.json();
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(u => u.email === formData.email);
+    alert("Login Successful ✅");
+    setMessage("");
 
-    if (user && user.password === formData.password) {
-      alert("Login Successful ✅");
-      setMessage("");
-      // navigate("/dashboard");
-    } else {
-      setMessage("Invalid credentials ❌");
-    }
-  };
+    // optional: store logged-in user
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+   navigate("/user");
+
+  } catch (error) {
+    console.error(error);
+    setMessage("Invalid credentials ❌");
+  }
+};
+
 
   const forgotPassword = () => {
     if (!formData.email) {
@@ -61,6 +82,7 @@ const LoginPage = () => {
   return (
     <section className="login-page">
       <div className="login-box">
+       
         <h2>AJA Tourism Corporation </h2>
 
         <form onSubmit={handleLogin}>
@@ -98,7 +120,12 @@ const LoginPage = () => {
 
           <p className="register-text">
             New here?
-            <a href="/"> Create account</a>
+            <span
+              style={{ color: "#007bff", cursor: "pointer", marginLeft: "5px" }}
+              onClick={() => navigate("/register")}
+            >
+              Create account
+            </span>
           </p>
         </form>
       </div>

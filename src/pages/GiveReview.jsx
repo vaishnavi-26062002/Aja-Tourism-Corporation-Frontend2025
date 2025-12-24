@@ -9,12 +9,12 @@ function StarRating({ rating, setRating, readOnly = false, size = 24 }) {
 
   return (
     
-    <div className="stars-18" style={{ fontSize: size, lineHeight: 1 }}>
+    <div className="stars" style={{ fontSize: size, lineHeight: 1 }}>
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
           type="button"
-          className="star-18"
+          className="star"
           aria-label={`${star} star${star > 1 ? "s" : ""}`}
           onClick={() => !readOnly && setRating(star)}
           onMouseEnter={() => !readOnly && setHover(star)}
@@ -93,25 +93,25 @@ const GiveReview = () => {
 
   return (
     
-    <div className="bg-ctr">
-    <div className="ctn-42">
-      <div className="wrap-42">
+    <div className="bg-container">
+    <div className="container">
+      <div className="wrap">
 
         {/* Centered card */}
-        <div className="card-42">
-          <form onSubmit={handleSubmit} className="form-42">
-            <div className="card-hdd">
+        <div className="card">
+          <form onSubmit={handleSubmit} className="form">
+            <div className="card-header">
               <h1>Enter Your Review</h1>
             </div>
 
-            <div className="card-body-18">
+            <div className="card-body">
               <input
                 type="text"
                 name="name"
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
-                className="card-data-18"
+                className="card-data"
               />
 
               <input
@@ -120,7 +120,7 @@ const GiveReview = () => {
                 placeholder="Package Name"
                 value={formData.packageName}
                 onChange={handleChange}
-                className="card-data-18"
+                className="card-data"
               />
 
               <textarea
@@ -128,13 +128,13 @@ const GiveReview = () => {
                 placeholder="Your Review"
                 value={formData.review}
                 onChange={handleChange}
-                className="card-data-18"
+                className="card-data"
                 rows={4}
               />
 
               {/* Rating control */}
-              <div className="field-18">
-                <label className="label-18">Rating</label>
+              <div className="field">
+                <label className="label">Rating</label>
                 <StarRating
                   rating={formData.rating}
                   setRating={(r) => setFormData((prev) => ({ ...prev, rating: r }))}
@@ -142,12 +142,12 @@ const GiveReview = () => {
               </div>
 
               {/* Photo upload + preview */}
-              <div className="field-18">
-                <label className="label-18">Photo (optional)</label>
-                <input type="file" accept="image/*" onChange={handlePhotoChange} className="card-data-18" />
+              <div className="field">
+                <label className="label">Photo (optional)</label>
+                <input type="file" accept="image/*" onChange={handlePhotoChange} className="card-data" />
                 {formData.photoFile && (
                   <img
-                    className="preview-42"
+                    className="preview"
                     src={URL.createObjectURL(formData.photoFile)}
                     alt="Preview"
                     width={80}
@@ -156,7 +156,7 @@ const GiveReview = () => {
                 )}
               </div>
 
-              <button type="submit" className="btn-18">Submit</button>
+              <button type="submit" className="btn">Submit</button>
             </div>
           </form>
         </div>

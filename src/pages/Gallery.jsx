@@ -29,7 +29,7 @@ const items = [
    {
     id: 4,
     title: 'Ramoji Film City',
-    img:'/ramoji.jpg',
+    img:'/ramoji02.jpg',
     desc:
     'Recognized as the world’s largest film studio complex, Ramoji Film City is a paradise for movie lovers. Explore film sets, enjoy guided tours, and experience entertainment shows for a fun-filled day.',
    },
@@ -193,6 +193,13 @@ const items = [
   img: '/chilkur.jpg',
   desc:
     'Visit the famous Chilkur Balaji Temple, also known as the Visa Balaji Temple, located on the outskirts of Hyderabad. A peaceful spiritual destination known for its unique prayer rituals and serene surroundings.',
+  },
+  {
+  id: 28,
+  title: 'AmmaPalli Temple',
+  img: '/ammapalli.jpg',
+  desc:
+    'The Ammapalli Temple, officially known as the Sri Sita Rama Chandra Swamy Temple, is an 11th–13th century shrine located near Shamshabad, on the outskirts of Hyderabad, Telangana. Built under the Vengi/Chalukya dynasties, it showcases striking Dravidian-style architecture highlighted by a majestic seven-story gopuram and intricately carved sanctum idols of Rama, Sita, and Lakshmana—carved from a single black rock.',
   },
 ];
 

@@ -11,7 +11,7 @@
 
 .hero-overlay {
   height: 100%;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: center;
   padding: 80px;
@@ -49,7 +49,7 @@
 /* PACKAGES */
 .package-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
@@ -88,12 +88,12 @@
 /* SERVICES */
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
 }
 
 .service-card {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   padding: 25px;
   text-align: center;
   border-radius: 12px;
@@ -102,7 +102,7 @@
 /* DESTINATIONS */
 .destination-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
 }
 
@@ -123,18 +123,18 @@
   bottom: 0;
   width: 100%;
   padding: 12px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
 
 /* WHY US */
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
 }
 
 .why-card {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   padding: 25px;
   border-radius: 12px;
   text-align: center;
