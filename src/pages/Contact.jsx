@@ -1,32 +1,64 @@
 import React, { useState } from "react";
 import "./Contact.css"; // Import the custom CSS file
+import Navbar from '../components/Navbar';
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
-    message: ""
+    mobileNo: "",
+    message: "",
   });
 
-  const handleChange = (e) => {
+const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
-    
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    console.log("Form submitted:", formData);
-    // Add your form submission logic here
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+
+    // ✅ Proper validation
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.mobileNo.trim() ||
+      !formData.message.trim()
+    ) {
+      alert("⚠️ Please fill all the fields");
+      return;
+    }
+
+    try {
+      // ✅ Send data exactly as backend expects
+      await axios.post("http://localhost:8080/api/enquiries/register", {
+        name: formData.name,
+        email: formData.email,
+        mobileNo: Number(formData.mobileNo), // Long in backend
+        message: formData.message,
+      });
+
+      alert("✅ Enquiry submitted successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        mobileNo: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      alert("❌ Server error. Please try again later.");
+    }
   };
+
 
   return (
+    <>
+      <Navbar />
     <section className="contact-section">
       <div className="container">
         <div className="row justify-content-lg-between">
@@ -193,10 +225,10 @@ const Contact = () => {
                 <div className="form-group">
                   <input
                     type="tel"
-                    name="phone"
+                    name="mobileNo"
                     className="form-control"
                     placeholder="Your Phone"
-                    value={formData.phone}
+                    value={formData.mobileNo}
                     onChange={handleChange}
                   />
                 </div>
@@ -280,6 +312,7 @@ const Contact = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
