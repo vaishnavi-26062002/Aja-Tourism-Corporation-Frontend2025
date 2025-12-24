@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
@@ -22,17 +22,20 @@ import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 
 import Bookings from "./pages/Bookings";
-
 import TourismChatbot from "./components/TourismChatbot";
 import Footer from "./components/Footer";
 
 import "./App.css";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
+function AppLayout() {
+  const location = useLocation();
 
+  // ✅ Hide footer on dashboard & all nested dashboard routes
+  const hideFooter = location.pathname.startsWith("/dashboard");
+
+  return (
+    <>
+      <Routes>
         {/* Public Pages */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
@@ -47,7 +50,6 @@ function App() {
 
         {/* Booking */}
         <Route path="/bookings" element={<Bookings />} />
-      
 
         {/* Dashboard */}
         <Route path="/dashboard" element={<DashboardLayout />}>
@@ -62,12 +64,21 @@ function App() {
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
-
       </Routes>
 
-      {/* Global Chatbot */}
-      <Footer />
+      {/* Footer only for NON-dashboard pages */}
+      {!hideFooter && <Footer />}
+
+      {/* Chatbot (optional – can also hide like footer if needed) */}
       <TourismChatbot />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppLayout />
     </BrowserRouter>
   );
 }

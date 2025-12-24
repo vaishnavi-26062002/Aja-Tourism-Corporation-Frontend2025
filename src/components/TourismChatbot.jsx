@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 //import logo from "/assets/logo.png";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo2.png";
 
 const TourismChatbot = () => {
   const [open, setOpen] = useState(false);
@@ -153,19 +153,43 @@ const TourismChatbot = () => {
           }}
         >
           {/* HEADER */}
-          <div
-            style={{
-              background: "#0d6efd",
-              color: "#fff",
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px"
-            }}
-          >
-            <img src={logo} alt="ATC" style={{ height: "32px" }} />
-            <strong>ATC Tourism Assistant</strong>
-          </div>
+          
+              <div
+                style={{
+                  background: "#0d6efd",
+                  color: "#fff",
+                  padding: "8px 10px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  gap: "8px",
+                  whiteSpace: "nowrap"
+                }}
+              >
+                <img
+                  src={logo}
+                  alt="ATC"
+                  style={{
+                    height: "32px",
+                    width: "32px",
+                    objectFit: "contain",
+                    flexShrink: 0
+                  }}
+                />
+                <span
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "15px",
+                      lineHeight: "1",
+                      whiteSpace: "nowrap",
+                      color: "#ffffff"
+                    }}
+                  >
+                    ATC Tourism Assistant
+                  </span>
+
+              </div>
+
 
           {/* MESSAGES */}
           <div style={{ flex: 1, padding: "10px", overflowY: "auto" }}>
