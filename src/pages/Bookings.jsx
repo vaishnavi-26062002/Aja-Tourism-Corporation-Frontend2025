@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Bookings.css";
-import logo from "../assets/logo2.png";
+//import logo from "../assets/logo2.png";
 
 const Bookings = () => {
   const navigate = useNavigate();
@@ -86,7 +86,7 @@ const Bookings = () => {
       currency: "INR",
       name: "AJA CORPORATION LIMITED",
       description: "Tour Booking Payment",
-      image: logo,
+      image: `${window.location.origin}/logo2.png`,
 
       handler: function () {
         alert("✅ Payment Successful!");
@@ -185,7 +185,7 @@ const Bookings = () => {
                     -
                   </button>
                 </div>
-
+                 <p className="label">Hotel Type</p>
                 <div className="mt-3">
                   {["3", "4", "5"].map((star) => (
                     <label key={star} className="me-3">

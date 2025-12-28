@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ramojiPoster from "../assets/ramoji.jpg";
-
+import charminarPoster from "../assets/charminar.jpg";
+import hussiansagarPoster from "../assets/hussiansagar.jpg";
 const slides = [
   {
     type: "mp4",
@@ -16,7 +17,9 @@ const slides = [
     description:
       "Charminar is a historic monument and global icon of Hyderabad.",
     video: "/videos/Charminar.mp4",
-    poster: ramojiPoster, // optional different poster
+    poster: charminarPoster, // optional different poster
+     
+
   },
   {
     type: "mp4",
@@ -25,8 +28,9 @@ const slides = [
       "Famous for stunning sunsets and the Buddha statue.",
     video:
       "/videos/HussainSagar.mp4",
-    poster: ramojiPoster,
+    poster: hussiansagarPoster,
   },
+  
   {
     type: "mp4",
   title: "Golconda Fort",
@@ -45,7 +49,6 @@ const slides = [
       "/videos/chowmahalla Palace.mp4",
      poster: ramojiPoster
 },
-
 ];
 
 const HeroVideo = () => {

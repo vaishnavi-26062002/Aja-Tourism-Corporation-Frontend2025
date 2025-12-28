@@ -1,34 +1,68 @@
 .dashboard-home {
-  padding: 20px;
+  padding: 25px;
+  background: #f7f8fa;
 }
 
-/* STATS */
+/* ===== STATS CARDS ===== */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  margin-bottom: 35px;
 }
 
 .stat-card {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 22px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== ICONS ===== */
+.card-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-booking {
+  color: #0d6efd;
+}
+
+.icon-customers {
+  color: #198754;
+}
+
+.icon-revenue {
+  color: #ffc107;
+}
+
+.icon-location {
+  color: #dc3545;
 }
 
 .stat-card h3 {
-  font-size: 16px;
+  font-size: 17px;
   color: #555;
+  font-weight: 600;
 }
 
 .stat-card p {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
-  margin-top: 8px;
+  margin-top: 5px;
+  color: #111;
 }
 
-/* CHARTS */
+/* ===== CHARTS ===== */
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -36,12 +70,13 @@
 }
 
 .chart-box {
-  background: #ffffff;
+  background: #fff;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .chart-box h3 {
   margin-bottom: 15px;
+  font-weight: 600;
 }

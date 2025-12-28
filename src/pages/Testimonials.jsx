@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Testimonials.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
 
-
-const testimonials = [
-  
+const staticTestimonials = [
   {
     name: "Mallesh Kumar Patnala",
     location: "Europe",
     review:
       "Our Hyderabad trip was seamless! From the historic Charminar to the serene Hussain Sagar Lake, AJA Tourism made every moment special.",
-    rating: "★★★★★", 
+    rating: "★★★★★",
     img: "/mallesh.jpg",
   },
   {
@@ -30,6 +28,15 @@ const testimonials = [
     rating: "★★★★☆",
     img: "/siva.jpg",
   },
+
+  {
+    name: "Manish Maharana",
+    location: "Delhi, India",
+    review: "The grandeur of Qutb Shahi Tombs and serenity of Hussain Sagar Lake made Hyderabad magical! AJA Tourism handled everything perfectly.",
+    rating: "★★★★★",
+    img: "/manish.jpg",
+  },
+
   {
     name: "Asma Khanam",
     location: "Saudi Arabia",
@@ -57,10 +64,9 @@ const testimonials = [
   {
     name: "Naveen Dasari",
     location: "Kerala, India",
-    review: 
-      "Exploring the City of Pearls was a dream come true!",
-      rating: "★★★★☆",
-      img: '/naveen.jpg'
+    review: "Exploring the City of Pearls was a dream come true!",
+    rating: "★★★★☆",
+    img: '/naveen.jpg'
   },
   {
     name: "Chandana Munja",
@@ -83,13 +89,7 @@ const testimonials = [
     rating: "★★★★★",
     img: "/supriya.jpg",
   },
-  {
-    name: "Manish Maharana",
-    location: "Delhi, India",
-    review: "The grandeur of Qutb Shahi Tombs and serenity of Hussain Sagar Lake made Hyderabad magical! AJA Tourism handled everything perfectly.",
-    rating: "★★★★★",
-    img: "/manish.jpg",
-  },
+
   {
     name: "Vaishnavi Moripoju",
     location: "Mumbai, India",
@@ -121,64 +121,101 @@ const testimonials = [
   {
     name: "Sri Pujita Nomula",
     location: "Bangalore, India",
-       review: "Hyderabad’s Ramoji Film City was a fun-filled adventure! AJA Tourism Corporation made everything smooth and enjoyable.",
+    review: "Hyderabad’s Ramoji Film City was a fun-filled adventure! AJA Tourism Corporation made everything smooth and enjoyable.",
     rating: "★★★★★",
     img: "/pujita.jpg",
   },
   {
     name: "Mohammed Arshad",
-    location: "Hyderabad, India", 
+    location: "Hyderabad, India",
     review: "Hyderabad’s charm and AJA Tourism’s service made our trip unforgettable!",
-    rating: "★★★★★", 
-    img: "/arshad.jpg" ,
+    rating: "★★★★★",
+    img: "/arshad.jpg",
   },
   {
     name: "Mohammed Imran Aziz",
     location: "Hyderabad, India",
     review: "From Charminar to Golconda, every moment was magical thanks to AJA Tourism!",
-       rating: "★★★★★", 
+    rating: "★★★★★",
     img: "/imran.jpg",
   },
 ];
 
-
-
 function Testimonials() {
   const navigate = useNavigate();
+  const [backendTestimonials, setBackendTestimonials] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/testmonial/all")
+      .then((res) => res.json())
+      .then((data) => {
+        setBackendTestimonials(data);
+      })
+      .catch((error) => console.log("Error loading testimonials:", error));
+  }, []);
+
   return (
     <>
-    <Navbar />
-    <div className="testimonial-page">
-      {/* Hero Section */}
-      <section className="testimonial-hero">
-        <div className="hero-overlay">
-          <h1>AJA Tourism Corporation</h1>
-          <p>What Our Happy Travelers Say</p>
-          
-          <button onClick={()=>navigate("/give-review")}>Give Your Review</button>
-          
-        </div>
-      </section>
+      <Navbar />
+      <div className="testimonial-page">
 
-      {/* Testimonials Section */}
-      <section className="testimonial-section">
-        <h2>Customer Testimonials</h2>
+        {/* Hero Section */}
+        <section className="testimonial-hero">
+          <div className="hero-overlay">
+            <h1>AJA Tourism Corporation</h1>
+            <p>What Our Happy Travelers Say</p>
+            <button onClick={() => navigate("/give-review")}>Give Your Review</button>
+          </div>
+        </section>
 
-        <div className="testimonial-grid">
-          {testimonials.map((item, index) => (
-            <div
-             className="testimonial-card" key={index}>
-              <img src={item.img} alt={item.name} className="profile-img" />
-              <p className="review">“{item.review}”</p>
-              <div className="rating">{item.rating}</div>
-              <h4>{item.name}</h4>
-              <span>{item.location}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+        {/* Testimonials Section */}
+        <section className="testimonial-section">
+          <h2>Customer Testimonials</h2>
+
+          <div className="testimonial-grid">
+
+            {/* ⭐ STATIC DATA FIRST */}
+            {staticTestimonials.map((item, index) => (
+              <div className="testimonial-card" key={`static-${index}`}>
+                <img src={item.img} alt={item.name} className="profile-img" />
+                <p className="review">“{item.review}”</p>
+                <div className="rating">{item.rating}</div>
+                <h4>{item.name}</h4>
+                <span>{item.location}</span>
+              </div>
+            ))}
+
+            {/* ⭐ BACKEND DATA AFTER */}
+           {backendTestimonials.map((item, index) => (
+  <div className="testimonial-card" key={`db-${index}`}>
+    <img
+      src={
+        item.image
+          ? `http://localhost:8080/uploads/${item.image}`
+          : "/default.jpg"
+      }
+      alt={item.name}
+      className="profile-img"
+    />
+
+    <p className="review">“{item.review}”</p>
+
+    <div className="rating">
+      {"★".repeat(item.rating)}{"☆".repeat(5 - item.rating)}
+    </div>
+
+    <h4>{item.name}</h4>
+
+    {/* 🔹 Show packageName here instead of location */}
+    {item.packageName && <span>{item.packageName}</span>}
   </div>
-  </>
+))}
+
+
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
 
