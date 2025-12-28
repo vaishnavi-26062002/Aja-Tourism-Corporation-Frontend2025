@@ -8,7 +8,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
 const handleLogin = () => {
-  if (username === "manish" && password === "manish") {
+  if (username === "admin" && password === "admin") {
     navigate("/dashboard"); // ✅ redirect here
   } else {
     alert("Invalid Admin Credentials");

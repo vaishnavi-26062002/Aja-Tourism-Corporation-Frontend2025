@@ -13,6 +13,8 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
+
+import { FaClipboardList, FaUsers, FaRupeeSign, FaMapMarkerAlt } from "react-icons/fa";
 import "./DashboardPage.css";
 
 /* ---------- SAMPLE DATA ---------- */
@@ -47,18 +49,25 @@ const DashboardHome = () => {
       {/* STATS CARDS */}
       <div className="stats-grid">
         <div className="stat-card">
+          <FaClipboardList className="card-icon icon-booking" />
           <h3>Total Bookings</h3>
-          <p>320</p>
+          <p>220</p>
         </div>
+
         <div className="stat-card">
+          <FaUsers className="card-icon icon-customers" />
           <h3>Total Customers</h3>
           <p>210</p>
         </div>
+
         <div className="stat-card">
+          <FaRupeeSign className="card-icon icon-revenue" />
           <h3>Revenue</h3>
           <p>₹4.8L</p>
         </div>
+
         <div className="stat-card">
+          <FaMapMarkerAlt className="card-icon icon-location" />
           <h3>Destinations</h3>
           <p>18</p>
         </div>
@@ -76,7 +85,7 @@ const DashboardHome = () => {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="bookings" stroke="#0b5ed7" />
+              <Line type="monotone" dataKey="bookings" stroke="#0b5ed7" strokeWidth={3}/>
             </LineChart>
           </ResponsiveContainer>
         </div>
