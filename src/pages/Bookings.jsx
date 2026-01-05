@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Bookings.css";
+//import logo from "../assets/logo2.png";
 
 const Bookings = () => {
   const navigate = useNavigate();
@@ -12,10 +13,6 @@ const Bookings = () => {
   const [children, setChildren] = useState(0);
   const [hotelStar, setHotelStar] = useState("");
   const [mealsIncluded, setMealsIncluded] = useState(false);
-
-  const [adultAmount, setAdultAmount] = useState("2500");
-  const [childAmount, setChildAmount] = useState("1000");
-  const [totalAmount, setTotalAmount] = useState("");
 
   const [errors, setErrors] = useState({});
 
@@ -31,29 +28,29 @@ const Bookings = () => {
     return () => document.body.removeChild(script);
   }, []);
 
-  /* ================= Amount Calculation ================= */
-  useEffect(() => {
-    if (!hotelStar || adults < 1) {
-      setAdultAmount("2500");
-      setChildAmount("1000");
-      setTotalAmount("");
-      return;
+  /* ================= Amount Calculation (NO setState) ================= */
+  const { adultAmount, childAmount, totalAmount } = useMemo(() => {
+    let adultPrice = 2500;
+    let childPrice = 1000;
+    let total = 0;
+
+    if (hotelStar && adults > 0) {
+      const starPrice =
+        hotelStar === "3" ? 2000 : hotelStar === "4" ? 3000 : 4000;
+
+      const mealPrice = mealsIncluded ? 500 : 0;
+
+      adultPrice = starPrice + mealPrice;
+      childPrice = Math.floor(adultPrice / 2);
+
+      total = adults * adultPrice + children * childPrice;
     }
 
-    const starPrice =
-      hotelStar === "3" ? 2000 : hotelStar === "4" ? 3000 : 4000;
-
-    const mealPrice = mealsIncluded ? 500 : 0;
-
-    const adultPerPerson = starPrice + mealPrice;
-    const childPerPerson = adultPerPerson / 2;
-
-    const adultTotal = adults * adultPerPerson;
-    const childTotal = children * childPerPerson;
-
-    setAdultAmount(adultPerPerson);
-    setChildAmount(childPerPerson);
-    setTotalAmount(adultTotal + childTotal);
+    return {
+      adultAmount: adultPrice,
+      childAmount: childPrice,
+      totalAmount: total,
+    };
   }, [adults, children, hotelStar, mealsIncluded]);
 
   /* ================= Validation ================= */
@@ -89,6 +86,7 @@ const Bookings = () => {
       currency: "INR",
       name: "AJA CORPORATION LIMITED",
       description: "Tour Booking Payment",
+      image: `${window.location.origin}/logo2.png`,
 
       handler: function () {
         alert("✅ Payment Successful!");
@@ -126,10 +124,11 @@ const Bookings = () => {
 
             <div className="card-body">
               <form onSubmit={handleSubmit} noValidate>
-
                 <input
                   type="text"
-                  className={`form-control mb-3 ${errors.userId ? "is-invalid" : ""}`}
+                  className={`form-control mb-3 ${
+                    errors.userId ? "is-invalid" : ""
+                  }`}
                   placeholder="User ID"
                   value={userId}
                   onChange={(e) => setUserId(e.target.value)}
@@ -137,7 +136,9 @@ const Bookings = () => {
 
                 <input
                   type="text"
-                  className={`form-control mb-3 ${errors.packageId ? "is-invalid" : ""}`}
+                  className={`form-control mb-3 ${
+                    errors.packageId ? "is-invalid" : ""
+                  }`}
                   placeholder="Package ID"
                   value={packageId}
                   onChange={(e) => setPackageId(e.target.value)}
@@ -146,7 +147,9 @@ const Bookings = () => {
                 <p>Travelling date</p>
                 <input
                   type="date"
-                  className={`form-control mb-3 ${errors.travelDate ? "is-invalid" : ""}`}
+                  className={`form-control mb-3 ${
+                    errors.travelDate ? "is-invalid" : ""
+                  }`}
                   value={travelDate}
                   onChange={(e) => setTravelDate(e.target.value)}
                 />
@@ -154,9 +157,16 @@ const Bookings = () => {
                 {/* ADULTS */}
                 <p className="label">Adults</p>
                 <div className="counter">
-                  <button type="button" onClick={() => setAdults(adults + 1)}>+</button>
+                  <button type="button" onClick={() => setAdults(adults + 1)}>
+                    +
+                  </button>
                   <span>{adults}</span>
-                  <button type="button" onClick={() => setAdults(Math.max(0, adults - 1))}>-</button>
+                  <button
+                    type="button"
+                    onClick={() => setAdults(Math.max(0, adults - 1))}
+                  >
+                    -
+                  </button>
                 </div>
 
                 <p className="note">Note: Children must be below 10 years</p>
@@ -164,11 +174,18 @@ const Bookings = () => {
                 {/* CHILDREN */}
                 <p className="label">Children</p>
                 <div className="counter">
-                  <button type="button" onClick={() => setChildren(children + 1)}>+</button>
+                  <button type="button" onClick={() => setChildren(children + 1)}>
+                    +
+                  </button>
                   <span>{children}</span>
-                  <button type="button" onClick={() => setChildren(Math.max(0, children - 1))}>-</button>
+                  <button
+                    type="button"
+                    onClick={() => setChildren(Math.max(0, children - 1))}
+                  >
+                    -
+                  </button>
                 </div>
-
+                 <p className="label">Hotel Type</p>
                 <div className="mt-3">
                   {["3", "4", "5"].map((star) => (
                     <label key={star} className="me-3">
@@ -192,16 +209,21 @@ const Bookings = () => {
                 </div>
 
                 <div className="mt-3 p-3 border rounded bg-light">
-                  <p>Adult Price / Person: <strong>₹ {adultAmount}</strong></p>
-                  <p>Child Price / Person: <strong>₹ {childAmount}</strong></p>
+                  <p>
+                    Adult Price / Person: <strong>₹ {adultAmount}</strong>
+                  </p>
+                  <p>
+                    Child Price / Person: <strong>₹ {childAmount}</strong>
+                  </p>
                   <hr />
-                  <h5 className="text-success">Total Amount: ₹ {totalAmount}</h5>
+                  <h5 className="text-success">
+                    Total Amount: ₹ {totalAmount}
+                  </h5>
                 </div>
 
                 <button type="submit" className="btn btn-success w-100 mt-3">
                   Proceed to Payment
                 </button>
-
               </form>
             </div>
           </div>

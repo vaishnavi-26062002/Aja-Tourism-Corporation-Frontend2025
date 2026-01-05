@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ramojiPoster from "../assets/ramoji.jpg";
-
+import charminarPoster from "../assets/charminar.jpg";
+import hussiansagarPoster from "../assets/hussiansagar.jpg";
 const slides = [
   {
     type: "mp4",
@@ -16,7 +17,9 @@ const slides = [
     description:
       "Charminar is a historic monument and global icon of Hyderabad.",
     video: "/videos/Charminar.mp4",
-    poster: ramojiPoster, // optional different poster
+    poster: charminarPoster, // optional different poster
+     
+
   },
   {
     type: "mp4",
@@ -25,21 +28,27 @@ const slides = [
       "Famous for stunning sunsets and the Buddha statue.",
     video:
       "/videos/HussainSagar.mp4",
-    poster: ramojiPoster,
+    poster: hussiansagarPoster,
   },
+  
   {
+    type: "mp4",
   title: "Golconda Fort",
   description:
     "Golconda Fort is a magnificent historic fortress known for its grand architecture, acoustic system, and panoramic city views.",
+    video:
+      "/videos/Galconda Fort.mp4", 
      poster: ramojiPoster,
 },
 {
+   type: "mp4",
   title: "Chowmahalla Palace",
   description:
     "Chowmahalla Palace is a royal heritage site showcasing the grandeur, culture, and lifestyle of the Nizams of Hyderabad.",
-     poster: ramojiPoster,
+     video:
+      "/videos/chowmahalla Palace.mp4",
+     poster: ramojiPoster
 },
-
 ];
 
 const HeroVideo = () => {

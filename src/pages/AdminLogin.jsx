@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -9,7 +8,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
 const handleLogin = () => {
-  if (username === "manish" && password === "manish") {
+  if (username === "admin" && password === "admin") {
     navigate("/dashboard"); // ✅ redirect here
   } else {
     alert("Invalid Admin Credentials");

@@ -1,173 +1,106 @@
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-//import "./DashboardPage.css";
+import "./PackagesPage.css";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+ 
 function PackagesPage() {
+ 
   const navigate = useNavigate();
+ 
+  // 🔹 State for backend data
+  const [packages, setPackages] = useState([]);
+  const [error, setError] = useState("");
 
-  const handleViewDetails = (packageId) => {
-    navigate("/bookings", {
-      state: { packageId },
-    });
+  // 🔗 Map backend packageId → direct route pages
+  const packageRoutes = {
+    5: "/family-package",
+    6: "/spiritual-package",
+    7: "/adventure-package",
+    8: "/couple-package",
+    9: "/friends-package",
+    10: "/students-package",
+    11: "/children-package",
+    12: "/historical-package",
+    13: "/women-package",
+
+
   };
-
+ 
+  const fetchPackages = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8080/api/packages/all"
+      );
+      setPackages(res.data);   // ← how many rows → that many cards
+      setError("");
+    } catch (err) {
+      console.error("Failed to load packages", err);
+      setError("Failed to load packages. Please check backend.");
+    }
+  };
+ 
+  useEffect(() => {
+    const loadData = async () => {
+      await fetchPackages();
+    };
+    loadData();
+  }, []);
+ 
   return (
-    <>
+    <div className="packages-page">
       <Navbar />
-
-      {/* ================= CAROUSEL ================= */}
-      <div
-        id="carouselExampleInterval"
-        className="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner">
-
-          <div className="carousel-item active" data-bs-interval="3000">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Chowmahalla_Palace_-_Khilwat_Mubarak.jpg"
-              className="d-block w-100"
-              alt="Chowmahalla Palace"
-            />
-            <div className="carousel-caption">
-              <h5>Chowmahalla Palace</h5>
-              <p>The Royal heritage of Hyderabad</p>
-            </div>
-          </div>
-
-          <div className="carousel-item" data-bs-interval="3000">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Forte_di_golconda%2C_vedute_da_est_04.jpg"
-              className="d-block w-100"
-              alt="Golconda Fort"
-            />
-            <div className="carousel-caption">
-              <h5>Golconda Fort</h5>
-              <p>Majestic hilltop fortress with rich history</p>
-            </div>
-          </div>
-
+      <div className="particles1"></div>
+ 
+      {/* HEADER */}
+      <header className="page-header1">
+        <div className="header-overlay1">
+          <h1>Explore Hyderabad</h1>
+          <p>Plan • Travel • Experience the Royal Heritage</p>
         </div>
+      </header>
+ 
+      {/* PACKAGES GRID */}
+      <div className="container1">
+ 
+        {/* Optional error */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+ 
+        <div className="grid1">
+          {packages.map((pkg) => (
+            <div className="package-card1" key={pkg.packageId}>
+ 
+              <div className="img-container1">
+                <img
+                  src={pkg.imageUrl}
+                  alt={pkg.packageName}
+                />
+              </div>
+ 
+              <div className="card-content1">
+                <h3>{pkg.packageName}</h3>
+               <p>₹{pkg.adultPrice + pkg.foodPrice + pkg.pickupPrice}</p>
 
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleInterval"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon"></span>
-        </button>
-
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleInterval"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon"></span>
-        </button>
-      </div>
-
-      {/* ================= TITLE ================= */}
-      <div className="container mt-4 text-center">
-        <h1 className="fw-bold">Plan • Travel • Experience</h1>
-        <p className="text-muted">
-          Discover places, plan trips, and travel smarter with AJA Tourism
-        </p>
-      </div>
-
-      {/* ================= PACKAGES ================= */}
-      <div className="container mt-4">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-
-          {/* FAMILY */}
-          <div className="col">
-            <div className="card shadow-sm h-100">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Forte_di_golconda%2C_vedute_da_est_04.jpg"
-                className="card-img-top"
-                alt="Family Package"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Family Package</h5>
-                <p className="card-text">Price - ₹4,999</p>
+ 
                 <button
-                  className="btn btn-success"
-                  onClick={() => handleViewDetails(1)}
+                  onClick={() => {
+                    const route = packageRoutes[pkg.packageId];
+                    route
+                      ? navigate(route)
+                      : alert("⚠️ Page not created for this package ID");
+                  }}
                 >
-                  View Details
+                  Book Now
                 </button>
+ 
               </div>
             </div>
-          </div>
-
-          {/* FRIENDS */}
-          <div className="col">
-            <div className="card shadow-sm h-100">
-              <img
-                src="https://media.istockphoto.com/id/825421318/photo/statue-of-buddha.jpg"
-                className="card-img-top"
-                alt="Friends Package"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Friends</h5>
-                <p className="card-text">Price - ₹9,700</p>
-                <button
-                  className="btn btn-success"
-                  onClick={() => handleViewDetails(2)}
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* STUDENTS */}
-          <div className="col">
-            <div className="card shadow-sm h-100">
-              <img
-                src="https://www.qutbshahiheritagepark.org/storage/common-section/01-2-24072401345419.jpg"
-                className="card-img-top"
-                alt="Students Package"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Students</h5>
-                <p className="card-text">Price - ₹8,000</p>
-                <button
-                  className="btn btn-success"
-                  onClick={() => handleViewDetails(3)}
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* COUPLE */}
-          <div className="col">
-            <div className="card shadow-sm h-100">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/4/41/Chowmahalla_Palace_-_Khilwat_Mubarak.jpg"
-                className="card-img-top"
-                alt="Couple Package"
-              />
-              <div className="card-body">
-                <h5 className="card-title">Couple</h5>
-                <p className="card-text">Price - ₹8,000</p>
-                <button
-                  className="btn btn-success"
-                  onClick={() => handleViewDetails(4)}
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-
+          ))}
         </div>
+ 
       </div>
-    </>
+    </div>
   );
 }
-
+ 
 export default PackagesPage;

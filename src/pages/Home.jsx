@@ -2,7 +2,8 @@ import React from "react";
 import "../styles/Home.css";
 import Navbar from "../components/Navbar";
 import HeroVideo from "../components/HeroVideo";
- 
+ import { useNavigate } from "react-router-dom";
+
 const packages = [
   {
     title: "Heritage Package",
@@ -41,6 +42,7 @@ const destinations = [
 ];
  
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -53,7 +55,8 @@ const Home = () => {
             <h1>Explore the Pearl City</h1>
             <h3>with AJA Tourism Corporation</h3>
             <p>Experience the beauty of the city</p>
-            <button className="home-hero-btn">Get Started</button>
+            <button className="home-hero-btn"  onClick={() => navigate("/login")} >
+              Get Started </button>
           </div>
         </div>
       </section>
@@ -70,7 +73,8 @@ const Home = () => {
                 <h3>{pkg.title}</h3>
                 <p>4 Days · Food · Guide</p>
                 <span>{pkg.price}</span>
-                <button>View Details</button>
+                <button onClick={() => navigate("/login")}> View Details
+                </button>
               </div>
             </div>
           ))}
@@ -114,7 +118,7 @@ const Home = () => {
         </div>
  
         <div className="home-center">
-          <button className="home-primary-btn">Get in Touch</button>
+          <button className="home-primary-btn" onClick={() => navigate("/contact")} >  Get in Touch </button>
         </div>
       </section>
     </>
