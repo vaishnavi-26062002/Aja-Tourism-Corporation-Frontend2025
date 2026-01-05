@@ -1,29 +1,29 @@
 /* Register.css */
 
- .page{
+ .page {
   margin: 0;
-  /* font-family: 'Poppins', sans-serif; */
-  background: url('../assets/hyd3.jpg.jpg') ;
-  height: 100vh;
+  background: url('../assets/hyd3.jpg.jpg') no-repeat center center;
+  background-size: cover;
+
+  min-height: calc(80vh - 120px); /* ✅ reserve space for footer */
   display: flex;
   align-items: center;
-  justify-content:center;
-  background-position: 0px;
-  background-size: cover;
-  
+  justify-content: center;
 
+  padding: 40px 20px 10px; /* ✅ bottom space for footer */
 }
+
 
 .register-page {
-  /* background: rgba(204, 188, 188, 0.65); */
-  padding: 15px 25px;
+  width: 380px;
+  padding: 15px 20px;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  width: 380px;
-  margin-right: 500px;
-  height: max-content 40px; 
-
+margin-right: 500px;
+  height: auto;       /* ✅ auto height */
+  
 }
+
 .register-page:hover{
   background: rgba(251, 252, 209, 0.5);
   
@@ -99,20 +99,21 @@ button:hover {
   text-align: center;
   margin-top: 10px;
   font-size: 14px;
-  color: aliceblue;
+  color: rgb(241, 243, 244);
 
 }
 
-.signin a {
-  color: #fcf4f7;
+.signin span {
+  color: #0b0b0a;
   text-decoration: none;
   font-size: large;
   font-weight: 800;
 }
 
-.signin a:hover {
+.signin span:hover {
   text-decoration: none;
-  color: rgba(223, 12, 12, 0.836);
+  color: rgba(223, 12, 12, 0.83);
+  font-size: large;
 }
 
 .file-upload{
